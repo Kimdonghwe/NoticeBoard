@@ -15,9 +15,6 @@ public class LoginController {
   }
 
 
-  @GetMapping("/join")
-  public String join() {
-    return "join/join"; // home.html을 반환
-  }
+
 
 }
