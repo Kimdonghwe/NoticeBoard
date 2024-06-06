@@ -22,10 +22,14 @@ public class JoinController {
   public String join() {
     return "join/join"; // home.html을 반환
   }
+
+
   @PostMapping
-  public  String joinAdd(@ModelAttribute JoinAddForm joinAddForm){
+  public String joinAdd(@ModelAttribute JoinAddForm joinAddForm) {
     log.info("joinAddForm = {} ", joinAddForm);
-    memberSVC.addUser(joinAddForm);
-    return "home/home";
+    Long managementId = memberSVC.addUser(joinAddForm);
+
+    return (managementId != null) ? "redirect:/" : "redirect:/join";
   }
+
 }
