@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const password = document.getElementById('pw');
     const pwCheck = document.getElementById('pw_check');
     const pwCheckError = document.getElementById('pw_check_error');
+    const duplicationBtn = document.getElementById('duplication_btn');
 
     pwCheck.addEventListener('focusout', function () {
         if (password.value !== pwCheck.value) {

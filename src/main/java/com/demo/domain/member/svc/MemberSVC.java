@@ -11,4 +11,6 @@ public interface MemberSVC {
 
   Optional<Member> getMemberByEmail(String email);
   Boolean existMemberByEmailAndPw(String email,String pw);
+
+  Boolean existMemberByEmail(String email);
 }

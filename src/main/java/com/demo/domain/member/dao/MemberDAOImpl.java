@@ -54,6 +54,16 @@ public class MemberDAOImpl implements MemberDAO{
   }
 
   @Override
+  public Boolean existMemberByEmail(String email) {
+    String sql = "select count(email) from member where email = :email ";
+
+    Map param = Map.of("email", email);
+    Integer cnt = template.queryForObject(sql, param, Integer.class);
+
+    return cnt == 1 ? true : false;
+  }
+
+  @Override
   public Boolean existMemberByEmailAndPw(String email,String pw) {
     String sql = "select count(email) from member where email = :email and pw = :pw ";
 

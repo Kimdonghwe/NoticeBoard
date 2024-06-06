@@ -29,4 +29,8 @@ public class MemberSVCImpl implements MemberSVC {
   public Boolean existMemberByEmailAndPw(String email, String pw) {
     return memberDAO.existMemberByEmailAndPw(email,pw);
   }
+  @Override
+  public Boolean existMemberByEmail(String email) {
+    return memberDAO.existMemberByEmail(email);
+  }
 }
