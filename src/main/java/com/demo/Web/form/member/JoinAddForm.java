@@ -1,4 +1,4 @@
-package com.demo.Web.form;
+package com.demo.Web.form.member;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package com.demo.domain.member.dao;
 
-import com.demo.Web.form.JoinAddForm;
+import com.demo.Web.form.member.JoinAddForm;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
