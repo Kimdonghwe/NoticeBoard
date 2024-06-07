@@ -1,55 +1,72 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title>NoticeBoard</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+	</head>
 
-<head>
-  <meta charset="UTF-8">
-  <title>NoticeBoard</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-</head>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="navigate-wrapper">
+				<!-- Navigation bar -->
+			</div>
+		</div>
 
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="navigate-wrapper col-md-8">
-      <!-- Navigation bar -->
-    </div>
-  </div>
+		<div class="row justify-content-center">
+			<div class="banner-wrapper">
+				<!-- Banner bar -->
+				<div><img src="https://cdn.pixabay.com/photo/2020/05/19/10/23/banner-5190092_960_720.jpg" alt="" /></div>
+			</div>
+		</div>
 
-  <div class="row justify-content-center">
-    <div class="banner-wrapper col-md-8">
-      <!-- Banner bar -->
-    </div>
-  </div>
+		<div class="row justify-content-center">
+			<div class="content-wrapper">
+				<div class="content-container">
+					<div class="board-title mb-3 row">
+						<!-- Board title -->
+						<div class="col-sm-12"><h1>게임게시판</h1></div>
+					</div>
 
-  <div class="row justify-content-center">
-    <div class="content-wrapper col-md-8">
-      <div class="content-container">
-        <div class="board-title">
-          <!-- Board title -->
-        </div>
+					<div class="category-wrap">
+						<div class="category-bar row">
+							<!-- Category bar -->
+							<div class="col-sm-1"><span>자유</span></div>
+							<div class="col-sm-1"><span>공략</span></div>
+						</div>
+					</div>
 
-        <div class="category-wrap">
-          <div class="category-bar">
-            <!-- Category bar -->
-          </div>
-        </div>
+					<div class="board-table">
+						<div class="table-header row">
+							<div class="col-sm-1"><p>번호</p></div>
+							<div class="col-sm-5"><p>제목</p></div>
+							<div class="col-sm-2"><p>작성자</p></div>
+							<div class="col-sm-2"><p>작성일</p></div>
+							<div class="col-sm-2"><p>조회수</p></div>
+						</div>
+						<div class="boardLst row">
+							<!-- 아이템 반복 시작 -->
+							<div class="board-item row" th:each="noticeBoard:${list}" th:data-trvlspot-id="${trvlspot.trvlCd}">
+								<div class="col-sm-1"><p th:text="${noticeBoard.noticeBoardId}">번호</p></div>
+								<div class="col-sm-5"><p th:text="${noticeBoard.title}">제목</p></div>
+								<div class="col-sm-2"><p th:text="${noticeBoard.nickname}">작성자</p></div>
+								<div class="col-sm-2"><p th:text="${noticeBoard.cdate}">작성일</p></div>
+								<div class="col-sm-2"><p th:text="${noticeBoard.hit}">조회수</p></div>
+							</div>
+							<!-- 아이템 종료-->
+						</div>
+						<!-- Board table -->
+					</div>
+				</div>
+			</div>
+		</div>
 
-        <div class="board-table">
-          <!-- Board table -->
-        </div>
+		<div class="row justify-content-center">
+			<div class="footer-wrapper col-md-8">
+				<!-- Footer content -->
+			</div>
+		</div>
+	</div>
 
-      </div>
-    </div>
-  </div>
-
-  <div class="row justify-content-center">
-    <div class="footer-wrapper col-md-8">
-      <!-- Footer content -->
-    </div>
-  </div>
-
-</div>
-
-<body>
-</body>
-
+	<body></body>
 </html>
