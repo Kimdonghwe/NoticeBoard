@@ -18,9 +18,9 @@ class MemberDAOImplTest {
   @DisplayName("지역으로검색")
   void addUser() {
     JoinAddForm joinAddForm = new JoinAddForm();
-    joinAddForm.setEmail("1");
+    joinAddForm.setEmail("kys1234@1234");
     joinAddForm.setPw("1");
-    joinAddForm.setNickname("가나다");
+    joinAddForm.setNickname("가나다라");
     joinAddForm.setTel("01012345678");
     joinAddForm.setGender("남");
     joinAddForm.setAddress("울산광역시 북구");
