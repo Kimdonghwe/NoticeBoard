@@ -18,9 +18,6 @@ class NoticeBoardDAOImplTest {
 
   @Test
   void getBoardLst() {
-    List<NoticeBoard> list = noticeBoardDAO.getBoardLst("B0101","SE");
 
-    log.info("size = {}", list.size());
-    list.forEach(ele -> log.info("ele = {}", ele));
   }
 }

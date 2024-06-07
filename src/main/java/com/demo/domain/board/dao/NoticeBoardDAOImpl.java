@@ -1,12 +1,12 @@
 package com.demo.domain.board.dao;
 
+import com.demo.Web.form.board.BoardListForm;
 import com.demo.domain.entity.NoticeBoard;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -20,8 +20,12 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
   }
 
   @Override
-  public List<NoticeBoard> getBoardLst(String codeId, String keyword) {
-    log.info("codeId = {}, keyword = {}", codeId, keyword);
+  public List<NoticeBoard> getBoardLst(BoardListForm boardListForm) {
+
+    String keyword = boardListForm.getKeyWord();
+    String codeId = boardListForm.getCodeId();
+    Long reqPage = boardListForm.getReqPage();
+    Long recPage = boardListForm.getRecCnt();
 
     StringBuilder sql = new StringBuilder();
     sql.append(" SELECT NOTICEBOARD_ID, MANAGEMENT_ID, TITLE, CODE_ID, HIT, NICKNAME, BCONTENT, PREFERENCE_ID, CDATE, UDATE ");
@@ -36,12 +40,13 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
       parameters.addValue("keyword", "%" + keyword + "%");
     }
 
-    log.info("Executing query: {}", sql.toString());
-    log.info("With parameters: {}", parameters.getValues());
+    sql.append("offset (:reqPage-1) * :recCnt rows ");
+    sql.append("fetch first :recCnt rows only ");
 
-    List<NoticeBoard> list = new ArrayList<>();
+    parameters.addValue("reqPage",reqPage);
+    parameters.addValue("recCnt",recPage);
 
-    log.info("list = {}", list);
+
     return template.query(sql.toString(), parameters,  (rs, rowNum) -> {
               NoticeBoard noticeBoard = new NoticeBoard();
               noticeBoard.setNoticeboardId(rs.getLong("NOTICEBOARD_ID"));
