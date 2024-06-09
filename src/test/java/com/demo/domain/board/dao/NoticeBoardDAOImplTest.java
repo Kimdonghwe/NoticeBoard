@@ -1,5 +1,6 @@
 package com.demo.domain.board.dao;
 
+import com.demo.Web.form.board.BoardListForm;
 import com.demo.domain.entity.NoticeBoard;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +18,13 @@ class NoticeBoardDAOImplTest {
   NoticeBoardDAO noticeBoardDAO;
 
   @Test
+  @DisplayName("게시글리스트")
   void getBoardLst() {
+
+    BoardListForm boardListForm = new BoardListForm();
+    List<NoticeBoard> list = noticeBoardDAO.getBoardLst(boardListForm);
+    
+    list.forEach(ele -> log.info("ele = {} ", ele));
 
   }
 }

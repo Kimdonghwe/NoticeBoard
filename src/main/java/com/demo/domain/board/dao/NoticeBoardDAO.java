@@ -9,4 +9,6 @@ public interface NoticeBoardDAO {
 
 
   List<NoticeBoard> getBoardLst(BoardListForm boardListForm);
+
+  int getBoardLstCnt(BoardListForm boardListForm);
 }

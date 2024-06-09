@@ -4,9 +4,19 @@
 		<meta charset="UTF-8" />
 		<title>NoticeBoard</title>
 		<script src="/static/js/board/boardList.js" defer></script>
-		<link href="/static/css/board/boardList.css" rel="stylesheet" />
+		<link link rel="stylesheet" type="text/css" href="/static/css/board/boardList.css" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 	</head>
+	<body>
+			<!-- GET 방식 폼 -->
+	<form id="searchForm" method="GET">
+		<input type="hidden" id="keyword" name="keyword" />
+		<input type="hidden" id="category" name="category" />
+		<input type="hidden" name="reqPage" value="" />
+		<input type="hidden" name="recCnt" value="" />
+		<input type="hidden" name="cpgs" value="" />
+		<input type="hidden" name="cp" value="" />
+	</form>
 
 	<div class="container">
 		<div class="row justify-content-center">
@@ -40,17 +50,18 @@
 
 					<div class="board-table">
 						<div class="table-header row">
-							<div class="col-sm-1"><p>번호</p></div>
-							<div class="col-sm-5"><p>제목</p></div>
-							<div class="col-sm-2"><p>작성자</p></div>
-							<div class="col-sm-2"><p>작성일</p></div>
-							<div class="col-sm-2"><p>조회수</p></div>
+							<div class="col-sm-1"><span>번호</span></div>
+							<div class="col-sm-5"><span>제목</span></div>
+							<div class="col-sm-2"><span>작성자</span></div>
+							<div class="col-sm-2"><span>작성일</span></div>
+							<div class="col-sm-2"><span>조회수</span></div>
 						</div>
 
-						<div class="boardLst freedom row">
+						
+						<div class="boardLst row mt-1">
 							<!-- 아이템 반복 시작 -->
-							<div class="board-item row" th:each="noticeBoard:${list}" th:data-trvlspot-id="${trvlspot.trvlCd}">
-								<div class="col-sm-1"><p th:text="${noticeBoard.noticeBoardId}">번호</p></div>
+							<div class="board-item row m-0 " th:each="noticeBoard:${list}" th:data-management-id="${noticeBoard.managementId}">
+								<div class="col-sm-1"><p th:text="${noticeBoard.noticeboardId}">번호</p></div>
 								<div class="col-sm-5"><p th:text="${noticeBoard.title}">제목</p></div>
 								<div class="col-sm-2"><p th:text="${noticeBoard.nickname}">작성자</p></div>
 								<div class="col-sm-2"><p th:text="${noticeBoard.cdate}">작성일</p></div>
@@ -59,10 +70,21 @@
 							<!-- 아이템 종료-->
 						</div>
 
-						<!-- Board table -->
 					</div>
 				</div>
 			</div>
+		</div>
+
+		<div class="Search_wrap d-flex justify-content-end">
+            <div class="d-flex">
+                <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search" id="searchInput">
+                <button class="btn btn-outline-success" type="button" id="searchButton">Search</button>
+            </div>
+        </div>
+		</div>
+	
+		<div class="Pagination_wrap d-flex justify-content-center">
+			<div id="pagination"></div>
 		</div>
 
 		<div class="row justify-content-center">
@@ -72,5 +94,41 @@
 		</div>
 	</div>
 
-	<body></body>
+	</body>
+	<script type="module" th:inline="javascript" async>
+
+        import { Pagination } from '/static/js/paging/paging.js';
+
+        // SSR 페이징 객체 생성
+        const pagination = new Pagination(16, 10); // 한페이지에 보여줄 레코드건수,한페이지에 보여줄 페이지수
+        //총 레코드 건수
+        const totalCnt = [[${ totalCnt }]];
+
+        pagination.setCurrentPageGroupStart([[${ cpgs }]]); //페이지 그룹 시작번호
+        pagination.setCurrentPage([[${ cp }]]); //현재 페이지
+        pagination.setTotalRecords(totalCnt); //총레코드 건수
+        pagination.displayPagination(nextPage);
+
+        // next Page 받아올 SSR GET방식
+        function nextPage() {
+            const reqPage = pagination.currentPage;   //요청 페이지
+            const recCnt = pagination.recordsPerPage; //페이지당 레코드수
+            const cpgs = pagination.currentPageGroupStart; //페이지 그룹 시작번호
+            const cp = pagination.currentPage;            //현재 페이지
+
+
+            const reqPageInput = document.querySelector('input[name="reqPage"]');
+            const recCntInput = document.querySelector('input[name="recCnt"]');
+            const cpgsInput = document.querySelector('input[name="cpgs"]');
+            const cpInput = document.querySelector('input[name="cp"]');
+
+            reqPageInput.value = reqPage;
+            recCntInput.value = recCnt;
+            cpgsInput.value = cpgs;
+            cpInput.value = cp;
+
+
+            document.getElementById("searchForm").submit();
+        }
+    </script>
 </html>

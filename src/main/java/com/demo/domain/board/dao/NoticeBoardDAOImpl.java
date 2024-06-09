@@ -28,7 +28,7 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
     Long recPage = boardListForm.getRecCnt();
 
     StringBuilder sql = new StringBuilder();
-    sql.append(" SELECT NOTICEBOARD_ID, MANAGEMENT_ID, TITLE, CODE_ID, HIT, NICKNAME, BCONTENT, PREFERENCE_ID, CDATE, UDATE ");
+    sql.append(" SELECT NOTICEBOARD_ID, MANAGEMENT_ID, TITLE, CODE_ID, HIT, NICKNAME, PREFERENCE_ID, CDATE, UDATE ");
     sql.append(" FROM NOTICEBOARD ");
     sql.append(" WHERE CODE_ID = :codeId ");
 
@@ -39,7 +39,6 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
       sql.append("AND TITLE LIKE :keyword ");
       parameters.addValue("keyword", "%" + keyword + "%");
     }
-
     sql.append("offset (:reqPage-1) * :recCnt rows ");
     sql.append("fetch first :recCnt rows only ");
 
@@ -54,7 +53,6 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
               noticeBoard.setTitle(rs.getString("TITLE"));
               noticeBoard.setNickname(rs.getString("NICKNAME"));
               noticeBoard.setCodeId(rs.getString("CODE_ID"));
-              noticeBoard.setBcontent(rs.getString("BCONTENT"));
               noticeBoard.setHit(rs.getLong("HIT"));
               noticeBoard.setPreferenceId(rs.getLong("PREFERENCE_ID"));
               noticeBoard.setCdate(rs.getTimestamp("CDATE").toLocalDateTime());
@@ -65,4 +63,26 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 
   }
 
+  @Override
+  public int getBoardLstCnt(BoardListForm boardListForm) {
+    String keyword = boardListForm.getKeyWord();
+    String codeId = boardListForm.getCodeId();
+
+    StringBuilder sql = new StringBuilder();
+    sql.append(" SELECT COUNT(*)");
+    sql.append(" FROM NOTICEBOARD ");
+    sql.append(" WHERE CODE_ID = :codeId ");
+
+    MapSqlParameterSource parameters = new MapSqlParameterSource();
+    parameters.addValue("codeId", codeId);
+
+    if (keyword != null && !keyword.trim().isEmpty()) {
+      sql.append("AND TITLE LIKE :keyword ");
+      parameters.addValue("keyword", "%" + keyword + "%");
+    }
+
+    int cnt = template.queryForObject(sql.toString(),parameters,Integer.class);
+
+    return cnt;
+  }
 }
