@@ -2,8 +2,12 @@ package com.demo.Web.controller.noticeBoard;
 
 
 import com.demo.Web.form.board.BoardListForm;
+import com.demo.Web.form.member.LoginForm;
+import com.demo.Web.form.member.SessionConst;
 import com.demo.domain.board.svc.NoticeBoardSVC;
 import com.demo.domain.entity.NoticeBoard;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +27,7 @@ public class BoardController {
   NoticeBoardSVC noticeBoardSVC;
 
   @GetMapping
-  public String boardList(
+  public String boardList( HttpServletRequest request,
                           @ModelAttribute BoardListForm boardListForm,
                           Model model){
 
@@ -40,6 +44,21 @@ public class BoardController {
 
 
     return "board/boardList";
+  }
+
+  @GetMapping("add")
+  public String addBoard( HttpServletRequest request,
+          Model model){
+
+    HttpSession session = request.getSession(false);  // Get existing session, do not create a new one
+    // Retrieve the LoginMember object from the session
+    LoginForm loginMember = (LoginForm) session.getAttribute(SessionConst.LOGIN_MEMBER);
+
+    model.addAttribute("nicknmae", loginMember.getNickname());
+    model.addAttribute("managementId", loginMember.getManagementId());
+    model.addAttribute("email", loginMember.getEmail());
+
+    return "board/addBoard";
   }
 
 }
