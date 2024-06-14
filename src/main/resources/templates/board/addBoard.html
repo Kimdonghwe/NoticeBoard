@@ -3,15 +3,34 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link href="./css/common/memberForm.css" rel="stylesheet" />
 		<link href="/static/css/board/addBoard.css" rel="stylesheet" />
+		<link href="/static/css/common/boardTitle.css" rel="stylesheet" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 		<title>게시글작성</title>
 	</head>
 	<body>
 		<div class="container">
 			<div class="row justify-content-center">
-				<div class="logo text-center p-0"><h1>게시글작성</h1></div>
+				<div class="navigate-wrapper">
+					<!-- Navigation bar -->
+				</div>
+			</div>
+
+			<div class="row justify-content-center">
+				<div class="board-title mb-3 row">
+					<!-- Board title -->
+					<div class="board-title-left col-sm-1">
+						<a href="/board"><img src="/static/img/GAME.png" alt="" /></a>
+					</div>
+					<div class="board-title-right col-sm-9">
+						<div><h2>kdh게임게시판</h2></div>
+						<div><span>구독자수 </span><span> : 100명 </span><span> |</span><span>관리자 : kdh </span></div>
+						<div><span>게임이벤트중@@@@@@@</span></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row justify-content-center">
 				<div class="col-md-12">
 					<div class="add-wrapper mt-5">
 						<!-- 게시글 form 시작 -->

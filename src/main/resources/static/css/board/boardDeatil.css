@@ -1,0 +1,40 @@
+/* 게시글 틀 */
+.container,
+.row,
+.col-md-12,
+.detail-wrapper,
+.card {
+	height: 100%;
+}
+.card {
+	display: flex;
+	flex-direction: column;
+}
+
+/* 구분선 */
+.title-wrapper {
+	border-top: 2px solid #333232; /* 상단 구분선 설정: 두께, 스타일, 색상 */
+	border-bottom: 2px solid #333232; /* 하단 구분선 설정: 두께, 스타일, 색상 */
+	background-color: #a9a4a4; /* 옅은 회색 배경색 설정 */
+	padding: 10px; /* 요소 내부 패딩을 추가하여 텍스트와 구분선 간격을 확보 */
+}
+
+.information-wrapper {
+	border-bottom: 2px solid #333232;
+	padding: 8px; /* 요소 내부 패딩을 추가하여 텍스트와 구분선 간격을 확보 */
+}
+
+.content-wrapper {
+	border-bottom: 2px solid #333232;
+	padding: 8px; /* 요소 내부 패딩을 추가하여 텍스트와 구분선 간격을 확보 */
+}
+/* 구분선 */
+
+/*텍스트 설정 */
+.info-head {
+	font-weight: bold; /* 텍스트를 굵게 설정 */
+}
+
+.title-wrapper > p {
+	font-weight: bold; /* 텍스트를 굵게 설정 */
+}

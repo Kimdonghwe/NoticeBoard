@@ -78,10 +78,12 @@ public class BoardController {
   }
 
   @GetMapping("/detail/{noticeboardId}")
-  public String getDeatilBoard(@PathVariable("noticeboardId") Long noticeboardId) {
+  public String getDeatilBoard(@PathVariable("noticeboardId") Long noticeboardId, Model model) {
     log.info("noticeboardId = {} ", noticeboardId);
 
     NoticeBoard noticeBoard = noticeBoardSVC.getBoardBynoticeboardId(noticeboardId);
+
+    model.addAttribute("noticeBoard", noticeBoard);
 
     return "board/boardDetail";
   }

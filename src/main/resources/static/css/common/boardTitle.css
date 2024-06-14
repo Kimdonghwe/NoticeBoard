@@ -1,8 +1,6 @@
 .board-title-left > a > img {
 	border-radius: 50%;
 	overflow: hidden;
-	width: 100px;
-	height: 100px;
 	max-width: 100%;
 	height: auto;
 }

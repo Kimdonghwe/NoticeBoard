@@ -3,41 +3,61 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="/static/css/board/boardDeatil.css" rel="stylesheet" />
+		<link href="/static/css/common/boardTitle.css" rel="stylesheet" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 		<title>조회</title>
 	</head>
 	<body>
 		<div class="container">
+			<!-- Navigation bar -->
 			<div class="row justify-content-center">
-				<div class="logo text-center p-0"><h1>게시글작성</h1></div>
-				<div class="col-md-12">
-					<div class="add-wrapper mt-5">
-						<!-- 게시글 form 시작 -->
-						<form action="" id="addBoardForm" method="post" class="card p-4">
-							<!-- 게시글 구분 -->
-							<div class="custom-select-wrapper">
-								<select id="selectGubun" class="col-sm-12" name="selectGubun" required>
-									<option value="B0101">자유</option>
-									<option value="B0102">공략</option>
-								</select>
-							</div>
+				<div class="navigate-wrapper"></div>
+			</div>
 
-							<!-- 게시글 제목 -->
-							<div class="title-wrapper mt-3">
-								<input type="text" class="form-control custom-input" id="title" name="title" required />
-							</div>
+			<div class="row justify-content-center">
+				<div class="board-title mb-3 row">
+					<!-- Board title -->
+					<div class="board-title-left col-sm-1">
+						<a href="/board"><img src="/static/img/GAME.png" alt="" /></a>
+					</div>
+					<div class="board-title-right col-sm-9">
+						<div><h2>kdh게임게시판</h2></div>
+						<div><span>구독자수 </span><span> : 100명 </span><span> |</span><span>관리자 : kdh </span></div>
+						<div><span>게임이벤트중@@@@@@@</span></div>
+					</div>
+				</div>
+			</div>
 
-							<!-- 게시글 본문 -->
-							<div class="content-wrapper mt-3 flex-grow-1">
-								<textarea class="form-control custom-textarea" id="content" name="content" required placeholder="게시글 내용을 입력하세요"></textarea>
-							</div>
+			<div class="row justify-content-center">
+				<div class="col-md-12 p-0">
+					<div class="detail-wrapper">
+						<!-- 게시글 detail 시작 -->
+						<!-- 게시글 제목 -->
+						<div class="title-wrapper row">
+							<p th:text="${noticeBoard.title}"></p>
+						</div>
+						<!-- 게시글 detail 종료 -->
+					</div>
+					<!-- 작성자/선호도/조회수/댓글수/작성일자 -->
+					<div class="information-wrapper row">
+						<div class="nickname-wrap col-md-7"><span th:text="${noticeBoard.nickname}"></span></div>
+						<div class="board-info-wrap col-md-5">
+							<!--  -->
+							<span class="info-head">추천 </span><span class="good">10</span><span> | </span>
+							<!--  -->
+							<span class="info-head">비추천 </span><span class="bad">10</span><span> | </span>
+							<!--  -->
+							<span class="info-head">댓글 </span><span class="rbbs">10</span><span> | </span>
+							<!--   -->
+							<span class="info-head">조회수 </span><span class="hit">100</span><span> | </span>
+							<!--   -->
+							<span class="info-head">작성일 </span><span class="cdate">2024-10-10</span>
+						</div>
+					</div>
 
-							<!-- 게시글 저장버튼 -->
-							<div class="submit-wrapper mt-3">
-								<button type="submit" class="btn btn-primary w-100">제출</button>
-							</div>
-						</form>
-						<!-- 게시글 form 종료 -->
+					<div class="content-wrapper row mt-3">
+						<div class="p-2"><p th:text="${noticeBoard.bcontent}">게시글 본문</p></div>
 					</div>
 				</div>
 			</div>
