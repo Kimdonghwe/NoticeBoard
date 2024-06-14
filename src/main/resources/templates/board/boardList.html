@@ -5,6 +5,7 @@
 		<title>NoticeBoard</title>
 		<script src="/static/js/board/boardList.js" defer></script>
 		<link link rel="stylesheet" type="text/css" href="/static/css/board/boardList.css" />
+		<link link rel="stylesheet" type="text/css" href="/static/css/common/boardTitle.css" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 	</head>
 	<body>
@@ -19,27 +20,32 @@
 	</form>
 
 	<div class="container">
+
 		<div class="row justify-content-center">
 			<div class="navigate-wrapper">
 				<!-- Navigation bar -->
 			</div>
 		</div>
 
-		<div class="row justify-content-center">
-			<div class="banner-wrapper">
-				<!-- Banner bar -->
-				<div><img src="https://cdn.pixabay.com/photo/2020/05/19/10/23/banner-5190092_960_720.jpg" alt="" /></div>
+		<div class="board-title mb-3 row">
+			<!-- Board title -->
+			<div class="board-title-left col-sm-1"><a href="/board"><img src="/static/img/GAME.png" alt=""></a></div>
+			<div class="board-title-right col-sm-9">
+				<div><h2>kdh게임게시판</h2></div>
+				<div>
+					<span>구독자수 </span>
+					<span> : 100명 </span>
+					<span>  |</span>
+					<span>관리자 : kdh </span>
+				</div>
+				<div><span>게임이벤트중@@@@@@@</span></div>
 			</div>
 		</div>
 
 		<div class="row justify-content-center">
 			<div class="content-wrapper">
 				<div class="content-container">
-					<div class="board-title mb-3 row">
-						<!-- Board title -->
-						<div class="col-sm-12"><h1>게임게시판</h1></div>
-					</div>
-
+				
 					<div class="category-wrap">
 						<div class="category-bar row">
 							<!-- Category bar -->
@@ -64,7 +70,7 @@
 						<div class="boardLst row mt-1">
 							<!-- 아이템 반복 시작 -->
 							<div class="board-item row m-0 " th:each="noticeBoard:${list}" th:data-management-id="${noticeBoard.managementId}">
-								<div class="col-sm-1"><p th:text="${noticeBoard.noticeboardId}">번호</p></div>
+								<div class=" col-sm-1"><p class="noticeBoardNum" th:text="${noticeBoard.noticeboardId}">번호</p></div>
 								<div class="col-sm-5"><p th:text="${noticeBoard.title}">제목</p></div>
 								<div class="col-sm-2"><p th:text="${noticeBoard.nickname}">작성자</p></div>
 								<div class="col-sm-2"><p th:text="${noticeBoard.cdate}">작성일</p></div>

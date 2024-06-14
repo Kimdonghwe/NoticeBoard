@@ -1,6 +1,7 @@
 package com.demo.Web.controller.noticeBoard;
 
 
+import com.demo.Web.form.board.AddBoardForm;
 import com.demo.Web.form.board.BoardListForm;
 import com.demo.Web.form.member.LoginForm;
 import com.demo.Web.form.member.SessionConst;
@@ -12,9 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -59,6 +58,32 @@ public class BoardController {
     model.addAttribute("email", loginMember.getEmail());
 
     return "board/addBoard";
+  }
+
+  @PostMapping("/add")
+  public String submitForm(HttpServletRequest request, @ModelAttribute AddBoardForm addBoardForm, Model model) {
+
+    HttpSession session = request.getSession(false);  // Get existing session, do not create a new one
+    // Retrieve the LoginMember object from the session
+    LoginForm loginMember = (LoginForm) session.getAttribute(SessionConst.LOGIN_MEMBER);
+
+    Long noticeBoardId = noticeBoardSVC.addBoard(addBoardForm,loginMember);
+
+    NoticeBoard board = noticeBoardSVC.getBoardBynoticeboardId(noticeBoardId);
+
+    model.addAttribute("board", board);
+
+    // Redirect or return a view name
+    return "board/boardDetail";
+  }
+
+  @GetMapping("/detail/{noticeboardId}")
+  public String getDeatilBoard(@PathVariable("noticeboardId") Long noticeboardId) {
+    log.info("noticeboardId = {} ", noticeboardId);
+
+    NoticeBoard noticeBoard = noticeBoardSVC.getBoardBynoticeboardId(noticeboardId);
+
+    return "board/boardDetail";
   }
 
 }
