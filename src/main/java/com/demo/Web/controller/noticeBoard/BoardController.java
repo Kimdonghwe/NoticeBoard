@@ -71,7 +71,7 @@ public class BoardController {
 
     NoticeBoard board = noticeBoardSVC.getBoardBynoticeboardId(noticeBoardId);
 
-    model.addAttribute("board", board);
+    model.addAttribute("noticeBoard", board);
 
     // Redirect or return a view name
     return "board/boardDetail";

@@ -26,7 +26,13 @@
 
 .content-wrapper {
 	border-bottom: 2px solid #333232;
-	padding: 8px; /* 요소 내부 패딩을 추가하여 텍스트와 구분선 간격을 확보 */
+	padding: 8px;
+	width: 100%;
+	box-sizing: border-box; /* 요소 내부 패딩을 추가하여 텍스트와 구분선 간격을 확보 */
+}
+.rbbs-head-wrapper {
+	border-bottom: 2px solid #333232;
+	padding: 8px;
 }
 /* 구분선 */
 
@@ -37,4 +43,15 @@
 
 .title-wrapper > p {
 	font-weight: bold; /* 텍스트를 굵게 설정 */
+}
+
+.content-wrapper p {
+	white-space: pre-wrap; /* 줄 바꿈을 유지 */
+	margin: 0; /* p 요소의 기본 마진을 제거하여 불필요한 여백을 줄임 */
+}
+
+@media (min-width: 768px) {
+	.content-wrapper {
+		min-height: 400px; /* 화면이 클 때 최소 높이를 설정 */
+	}
 }
