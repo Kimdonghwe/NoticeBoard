@@ -28,8 +28,9 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 //  게시글 조회
   @Override
   public List<NoticeBoard> getBoardLst(BoardListForm boardListForm) {
+    log.info("boardListForm = {} ", boardListForm);
 
-    String keyword = boardListForm.getKeyWord();
+    String keyword = boardListForm.getKeyword();
     String codeId = boardListForm.getCodeId();
     Long reqPage = boardListForm.getReqPage();
     Long recPage = boardListForm.getRecCnt();
@@ -72,7 +73,7 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 
   @Override
   public int getBoardLstCnt(BoardListForm boardListForm) {
-    String keyword = boardListForm.getKeyWord();
+    String keyword = boardListForm.getKeyword();
     String codeId = boardListForm.getCodeId();
 
     StringBuilder sql = new StringBuilder();

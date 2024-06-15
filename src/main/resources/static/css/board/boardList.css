@@ -16,6 +16,7 @@
 	border-right: none;
 }
 
-.hit {
-	padding-left: 20px;
+.active {
+    background-color: #e0e2e4;
+    color: rgb(94, 91, 91);
 }

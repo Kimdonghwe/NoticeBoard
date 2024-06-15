@@ -43,7 +43,7 @@ public class LoginController {
       if (optionalMember.isPresent()) {
         HttpSession session = request.getSession(true);  // 세션 생성
         Member member = optionalMember.get();
-        LoginForm loginMember = new LoginForm(member.getManagementId(), member.getEmail(), member.getNickname());
+        LoginForm loginMember = new LoginForm(member.getManagementId(), member.getNickname() ,member.getEmail());
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
 
       } else {
@@ -58,6 +58,17 @@ public class LoginController {
     }
 
     return "redirect:/board";
+  }
+
+  @GetMapping("/logout")
+  public String logout(HttpServletRequest request) {
+    // 세션 무효화
+    HttpSession session = request.getSession();
+    if (session != null) {
+      session.invalidate();
+    }
+    // 초기화면으로 리디렉션
+    return "redirect:/";
   }
 
 

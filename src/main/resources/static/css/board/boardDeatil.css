@@ -41,7 +41,7 @@
 	font-weight: bold; /* 텍스트를 굵게 설정 */
 }
 
-.title-wrapper > p {
+.title-wrapper > span {
 	font-weight: bold; /* 텍스트를 굵게 설정 */
 }
 
@@ -54,4 +54,25 @@
 	.content-wrapper {
 		min-height: 400px; /* 화면이 클 때 최소 높이를 설정 */
 	}
+}
+
+
+/* 댓글 부분 */
+
+.item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.head-info {
+    flex: 2;
+    display: flex;
+    align-items: center;
+	background-color: #a9a4a4;
+	font-weight: bolder;
+}
+
+.comment-wrap {
+    flex: 8;
 }

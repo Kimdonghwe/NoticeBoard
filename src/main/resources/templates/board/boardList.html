@@ -3,6 +3,10 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>NoticeBoard</title>
+		<!-- 네비게이션바 부분 -->
+		<script src="/static/js/common/navigation.js" defer></script>
+		<link link rel="stylesheet" type="text/css" href="/static/css/common/navigation.css" />
+		<!-- content 부분-->
 		<script src="/static/js/board/boardList.js" defer></script>
 		<link link rel="stylesheet" type="text/css" href="/static/css/board/boardList.css" />
 		<link link rel="stylesheet" type="text/css" href="/static/css/common/boardTitle.css" />
@@ -11,21 +15,36 @@
 	<body>
 			<!-- GET 방식 폼 -->
 	<form id="searchForm" method="GET">
-		<input type="hidden" id="keyword" name="keyword" />
-		<input type="hidden" id="category" name="category" />
+		<input type="hidden" id="keyword" name="keyword" th:value = "${keyword}"/>
+		<input type="hidden" id="category" name="codeId" th:value = "${codeId}"/>
 		<input type="hidden" name="reqPage" value="" />
 		<input type="hidden" name="recCnt" value="" />
 		<input type="hidden" name="cpgs" value="" />
 		<input type="hidden" name="cp" value="" />
 	</form>
 
-	<div class="container">
-
-		<div class="row justify-content-center">
-			<div class="navigate-wrapper">
-				<!-- Navigation bar -->
-			</div>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" th:href="@{http://localhost:9080}"><img src="/static/img/logo/icons8-game-controller-100.png" alt=""></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav ml-auto">
+				<li th:if="${session.loginMember != null}" class="nav-item">
+					<button id="dropdownButton" class="btn " th:text="${session.loginMember.nickname}+'님'">메뉴 열기</button>
+					<div id="dropdownMenu" class="dropdown-menu">
+						<a href="/logout">로그아웃</a>
+						<a href="#">마이페이지</a>
+					</div>
+				</li>
+				<li th:if="${session.loginMember == null}" class="nav-item">
+					<a class="nav-link" th:href="@{http://localhost:9080}">로그인</a>
+				</li>
+			</ul>
 		</div>
+	</nav>
+
+	<div class="container">
 
 		<div class="board-title mb-3 row">
 		<!-- Board title -->
@@ -66,8 +85,8 @@
 						
 						<div class="boardLst row mt-1">
 							<!-- 아이템 반복 시작 -->
-							<div class="board-item row m-0 " th:each="noticeBoard:${list}" th:data-management-id="${noticeBoard.managementId}">
-								<div class=" col-sm-1"><p class="noticeBoardNum" th:text="${noticeBoard.noticeboardId}">번호</p></div>
+							<div class="board-item row m-0 " th:each="noticeBoard,stat:${list}" th:data-management-id="${noticeBoard.managementId}">
+								<div class=" col-sm-1"><p class="noticeBoardNum" th:text="${stat.count}" th:data-noticeboard-id="${noticeBoard.noticeboardId}">번호</p></div>
 								<div class="col-sm-5"><p th:text="${noticeBoard.title}">제목</p></div>
 								<div class="col-sm-2"><p th:text="${noticeBoard.nickname}">작성자</p></div>
 								<div class="col-sm-2"><p th:text="${noticeBoard.cdate}">작성일</p></div>
@@ -102,6 +121,9 @@
 	</div>
 
 	</body>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script type="module" th:inline="javascript" async>
 
         import { Pagination } from '/static/js/paging/paging.js';
@@ -137,5 +159,30 @@
 
             document.getElementById("searchForm").submit();
         }
+
+			const buttons = document.querySelectorAll('.category-btn');
+
+    		buttons.forEach(button => {
+        	button.addEventListener('click', () => {
+
+			document.getElementById("category").value = button.getAttribute('data-code-id');
+			document.getElementById("keyword").value = "";
+			pagination.currentPageGroupStart = 1;
+			pagination.currentPage = 1;
+			nextPage();
+        });
+    });
+
+			document.getElementById("searchButton").addEventListener('click', () => {
+
+		    const searchInput = document.getElementById("searchInput").value;
+            document.getElementById("keyword").value = searchInput;
+            pagination.currentPageGroupStart = 1;
+            pagination.currentPage = 1;
+            nextPage();
+	});
+
+
+
     </script>
 </html>

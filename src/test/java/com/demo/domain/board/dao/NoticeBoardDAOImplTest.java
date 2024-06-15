@@ -34,15 +34,18 @@ class NoticeBoardDAOImplTest {
   @DisplayName("게시글저장")
   void addBoard() {
 
-    LoginForm loginForm = new LoginForm(22L, "가나다라", "kys1234@1234");
+    for(int i=0 ; i< 100; i++) {
+      LoginForm loginForm = new LoginForm(1L, "kimdonghwe", "kdh1234@naver.com");
 
-    // AddBoardForm 객체 생성 및 값 할당
-    AddBoardForm addBoardForm = new AddBoardForm();
-    addBoardForm.setSelectGubun("B0101");
-    addBoardForm.setTitle("게시글 제목");
-    addBoardForm.setContent("게시글 내용");
+      // AddBoardForm 객체 생성 및 값 할당
+      AddBoardForm addBoardForm = new AddBoardForm();
+      addBoardForm.setSelectGubun("B0102");
+      addBoardForm.setTitle("WarOfGoddess5 Vengence"+" "+i);
+      addBoardForm.setContent("공략"+" "+i);
 
-    log.info("noticeBoardId = {} ",noticeBoardDAO.addBoard(addBoardForm,loginForm));
+      log.info("noticeBoardId = {} ", noticeBoardDAO.addBoard(addBoardForm, loginForm));
+
+    }
   }
 
   @Test
