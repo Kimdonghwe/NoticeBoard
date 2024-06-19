@@ -7,6 +7,7 @@
 		<script src="/static/js/common/navigation.js" defer></script>
 		<link link rel="stylesheet" type="text/css" href="/static/css/common/navigation.css" />
 		<!--  -->
+		<script src="/static/js/board/boardDetail.js" defer></script>
 		<link href="/static/css/board/boardDeatil.css" rel="stylesheet" />
 		<link href="/static/css/common/boardTitle.css" rel="stylesheet" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -46,7 +47,7 @@
 					</div>
 					<div class="board-title-right col-sm-9">
 						<div><h2>kdh게임게시판</h2></div>
-						<div><span>구독자수 </span><span> : 100명 </span><span> |</span><span>관리자 : kdh </span></div>
+						<div><span>구독자수 </span><span> : 100 </span><span> |</span><span>관리자 : kdh </span></div>
 						<div><span>게임이벤트중@@@@@@@</span></div>
 					</div>
 				</div>
@@ -58,12 +59,12 @@
 						<!-- 게시글 detail 시작 -->
 						<!-- 게시글 제목 -->
 						<div class="title-wrapper row">
-							<span class="col-sm-10" th:text="${noticeBoard.title}">게시글 제목</span>
+							<span class="col-sm-10" id ="title" th:text="${noticeBoard.title}" th:data-noticeboard-id="${noticeBoard.noticeboardId}" >게시글 제목</span>
 							<!-- 예시로 session에서 가져온 닉네임이 '작성자1'인 경우 -->
 							<div class="btn-group col-sm-2" th:if="${session.loginMember.nickname == noticeBoard.nickname}">
-								<button type="button" class="btn btn-sm ">수정</button>
+								<button type="button" class="btn btn-sm " id="edit-Btn" >수정</button>
 								<span> | </span>
-								<button type="button" class="btn btn-sm ">삭제</button>
+								<button type="button" class="btn btn-sm " id="delete-Btn">삭제</button>
 							</div>
 						</div>
 						<!-- 게시글 detail 종료 -->
@@ -73,13 +74,16 @@
 						<div class="nickname-wrap col-md-7"><span th:text="${noticeBoard.nickname}"></span></div>
 						<div class="board-info-wrap col-md-5">
 							<!--  -->
-							<span class="info-head">추천 </span><span class="good">10</span><span> | </span>
-							<!--  -->
-							<span class="info-head">비추천 </span><span class="bad">10</span><span> | </span>
+							<div class="like-button-wrap">
+								<button id="likeButton" class="like-button" data-liked="false" >
+									❤️ 좋아요
+								</button>
+								<span id="likeCount" th:text="${good}"> 0 </span> <span> | </span>
+							</div>
 							<!--  -->
 							<span class="info-head">댓글 </span><span class="rbbs">10</span><span> | </span>
 							<!--   -->
-							<span class="info-head">조회수 </span><span class="hit">100</span><span> | </span>
+							<span class="info-head">조회수 </span><span class="hit" th:text="${noticeBoard.hit}">100</span><span> | </span>
 							<!--   -->
 							<span class="info-head">작성일 </span><span class="cdate">2024-10-10</span>
 						</div>
@@ -114,4 +118,8 @@
 			</div>
 		</template>
 	</body>
+	<script>
+
+
+	</script>
 </html>

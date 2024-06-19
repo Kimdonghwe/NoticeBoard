@@ -17,4 +17,10 @@ public interface NoticeBoardDAO {
   Long addBoard(AddBoardForm addBoardForm, LoginForm loginForm);
 
   NoticeBoard getBoardBynoticeboardId(Long noticeboardId);
+
+  int updateBoardBynoticeboardId(AddBoardForm addBoardForm, Long managementId, Long noticeboardId);
+
+  int deleteBoardBynoticeboardId(Long managementId, Long noticeboardId);
+
+  void calucateHit(Long noticeboardId);
 }

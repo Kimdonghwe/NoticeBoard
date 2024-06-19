@@ -56,4 +56,18 @@ class NoticeBoardDAOImplTest {
     log.info("noticeboard = {} ", noticeBoardDAO.getBoardBynoticeboardId(22l));
 
   }
+
+  @Test
+  @DisplayName("게시글수정")
+  void updateBoardBynoticeboardId() {
+    AddBoardForm addBoardForm = new AddBoardForm();
+    addBoardForm.setContent("helohelohelo");
+    addBoardForm.setSelectGubun("B0102");
+    addBoardForm.setTitle("테스트용");
+    Long noticeboardId = 141l;
+    Long managementId = 1l;
+
+    log.info("cnt = {} ", noticeBoardDAO.updateBoardBynoticeboardId(addBoardForm,managementId,noticeboardId));
+    
+  }
 }

@@ -36,4 +36,19 @@ public class NoticeBoardSVCImpl implements NoticeBoardSVC{
   public NoticeBoard getBoardBynoticeboardId(Long noticeboardId) {
     return noticeBoardDAO.getBoardBynoticeboardId(noticeboardId);
   }
+
+  @Override
+  public int updateBoardBynoticeboardId(AddBoardForm addBoardForm, Long managementId, Long noticeboardId) {
+    return noticeBoardDAO.updateBoardBynoticeboardId(addBoardForm,managementId,noticeboardId);
+  }
+
+  @Override
+  public int deleteBoardBynoticeboardId(Long managementId, Long noticeboardId) {
+    return noticeBoardDAO.deleteBoardBynoticeboardId(managementId,noticeboardId);
+  }
+
+  @Override
+  public void calucateHit(Long noticeboardId) {
+    noticeBoardDAO.calucateHit(noticeboardId);
+  }
 }

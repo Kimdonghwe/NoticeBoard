@@ -35,7 +35,6 @@
 			</div>
 		</nav>
 
-
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="board-title mb-3 row">
@@ -55,7 +54,7 @@
 				<div class="col-md-12">
 					<div class="add-wrapper mt-5">
 						<!-- 게시글 form 시작 -->
-						<form action="" id="addBoardForm" method="post" class="card p-4">
+						<form th:action="@{/board/edit/{id}(id=${noticeBoard.noticeboardId})}" id="editBoardForm" method="post" class="card p-4">
 							<!-- 게시글 구분 -->
 							<div class="custom-select-wrapper">
 								<select id="selectGubun" class="col-sm-12" name="selectGubun" required>
@@ -66,17 +65,17 @@
 
 							<!-- 게시글 제목 -->
 							<div class="title-wrapper mt-3">
-								<input type="text" class="form-control custom-input" id="title" name="title" required />
+								<input type="text" class="form-control custom-input" id="title" name="title" th:value="${noticeBoard.title}"  required />
 							</div>
 
 							<!-- 게시글 본문 -->
 							<div class="content-wrapper mt-3 flex-grow-1">
-								<textarea class="form-control custom-textarea" id="content" name="content" required placeholder="게시글 내용을 입력하세요"></textarea>
+								<textarea class="form-control custom-textarea" id="content" name="content" th:text="${noticeBoard.bcontent}" required placeholder="게시글 내용을 입력하세요" ></textarea>
 							</div>
 
 							<!-- 게시글 저장버튼 -->
 							<div class="submit-wrapper mt-3">
-								<button type="submit" class="btn btn-primary w-100">제출</button>
+								<button type="submit" class="btn btn-primary w-100">수정</button>
 							</div>
 						</form>
 						<!-- 게시글 form 종료 -->

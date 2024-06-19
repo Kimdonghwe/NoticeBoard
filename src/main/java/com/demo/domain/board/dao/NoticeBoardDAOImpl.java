@@ -47,6 +47,9 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
       sql.append("AND TITLE LIKE :keyword ");
       parameters.addValue("keyword", "%" + keyword + "%");
     }
+
+    sql.append("ORDER BY UDATE DESC "); // UDATE를 기준으로 내림차순 정렬
+
     sql.append("offset (:reqPage-1) * :recCnt rows ");
     sql.append("fetch first :recCnt rows only ");
 
@@ -101,9 +104,8 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
   public Long addBoard(AddBoardForm addBoardForm, LoginForm loginForm) {
     StringBuffer sql = new StringBuffer();
 
-    sql.append(" INSERT INTO NOTICEBOARD (NOTICEBOARD_ID, MANAGEMENT_ID, TITLE, CODE_ID, NICKNAME, BCONTENT, HIT, PREFERENCE_ID)  ");
-    sql.append(" VALUES (NOTICEBOARDTB_NOTICEBOARD_ID.NEXTVAL, :managementId, :title, :codeId, :nickname, :bcontent, 0 ,0 ) ");
-
+    sql.append(" INSERT INTO NOTICEBOARD (NOTICEBOARD_ID, MANAGEMENT_ID, TITLE, CODE_ID, NICKNAME, BCONTENT, HIT)  ");
+    sql.append(" VALUES (NOTICEBOARDTB_NOTICEBOARD_ID.NEXTVAL, :managementId, :title, :codeId, :nickname, :bcontent, 0  ) ");
     MapSqlParameterSource parameters = new MapSqlParameterSource();
     parameters.addValue("managementId", loginForm.getManagementId());
     parameters.addValue("title", addBoardForm.getTitle());
@@ -136,6 +138,59 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 
     NoticeBoard noticeBoard = template.queryForObject(sql.toString(),parameters, BeanPropertyRowMapper.newInstance(NoticeBoard.class));
     return noticeBoard;
+
+  }
+
+//  게시글 업데이트
+  @Override
+  public int updateBoardBynoticeboardId(AddBoardForm addBoardForm, Long managementId, Long noticeboardId) {
+    StringBuffer sql = new StringBuffer();
+
+    sql.append(" update noticeboard  ");
+    sql.append(" set title = :title, ");
+    sql.append("         code_id = :codeId, ");
+    sql.append("         bcontent = :bcontent, ");
+    sql.append("         udate = SYSDATE");
+    sql.append(" where management_id = :managementId and noticeboard_id = :noticeboardId ");
+
+
+    MapSqlParameterSource parameters = new MapSqlParameterSource();
+    parameters.addValue("managementId", managementId);
+    parameters.addValue("title", addBoardForm.getTitle());
+    parameters.addValue("codeId", addBoardForm.getSelectGubun());
+    parameters.addValue("bcontent", addBoardForm.getContent());
+    parameters.addValue("noticeboardId", noticeboardId);
+
+    int cnt = template.update(sql.toString(),parameters);
+
+    return cnt;
+  }
+
+  @Override
+  public int deleteBoardBynoticeboardId(Long managementId, Long noticeboardId) {
+    StringBuffer sql = new StringBuffer();
+
+    sql.append(" delete noticeboard  ");
+    sql.append(" where management_id = :managementId and noticeboard_id = :noticeboardId ");
+
+    MapSqlParameterSource parameters = new MapSqlParameterSource();
+    parameters.addValue("managementId", managementId);
+    parameters.addValue("noticeboardId", noticeboardId);
+
+    int cnt = template.update(sql.toString(),parameters);
+
+    return cnt;
+  }
+
+
+  @Override
+  public void calucateHit(Long noticeboardId) {
+
+    String updatePreference = "UPDATE NOTICEBOARD SET HIT = HIT + 1 WHERE NOTICEBOARD_ID = :noticeboardId";
+    MapSqlParameterSource params = new MapSqlParameterSource();
+    params.addValue("noticeboardId", noticeboardId);
+
+    template.update(updatePreference, params);
 
   }
 }
