@@ -8,6 +8,7 @@ import com.demo.Web.form.member.SessionConst;
 import com.demo.domain.board.svc.NoticeBoardSVC;
 import com.demo.domain.entity.NoticeBoard;
 import com.demo.domain.prefer.svc.PreferSVC;
+import com.demo.domain.rbbs.svc.RbbsSVC;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,9 @@ public class BoardController {
   NoticeBoardSVC noticeBoardSVC;
   @Autowired
   PreferSVC preferSVC;
+
+  @Autowired
+  RbbsSVC rbbsSVC;
 
   @GetMapping
   public String boardList( HttpServletRequest request,
@@ -93,9 +97,11 @@ public class BoardController {
     log.info("noticeboardId = {} ", noticeboardId);
 
     NoticeBoard noticeBoard = noticeBoardSVC.getBoardBynoticeboardId(noticeboardId);
+    int commentCnt = rbbsSVC.getCommentCntBynoticeboardId(noticeboardId);
 
     int good = preferSVC.getGood(noticeboardId);
 
+    model.addAttribute("commentCnt", commentCnt);
     model.addAttribute("good", good);
     model.addAttribute("noticeBoard", noticeBoard);
 

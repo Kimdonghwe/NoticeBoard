@@ -1,0 +1,93 @@
+/* 댓글 리스트 부분 */
+.item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.head-info {
+    flex: 2;
+    display: flex;
+    align-items: center;
+	background-color: #a9a4a4;
+}
+
+.comment-wrap {
+    flex: 8;
+}
+
+/* 댓글 입력칸 부분 */
+
+.input-item {
+    display: flex;
+    flex-direction: column;
+    height: 160px;
+}
+
+
+.input-head-info {
+    flex: 2;
+    display: flex;
+    border-bottom: 1px dotted black;
+    border-left: none;
+    border-right: none;
+}
+.input-comment-nickname {
+    color: #a19f9f ; /* 옅은 회색 */
+}
+
+.comment-wrap {
+    flex: 8; /* 원하는 높이 설정 */
+    position: relative;
+}
+
+.comment-wrap textarea {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box; /* 패딩과 보더를 포함한 크기 조정 */
+    border: none; /* 구분선 제거 */
+    resize: none; /* 사용자가 크기를 조정하지 못하게 함 (선택 사항) */
+    outline: none; /* 클릭 시 나타나는 구분선 제거 *//* 사용자가 크기를 조정하지 못하게 함 (선택 사항) */
+}
+
+.comment-submit {
+    position: absolute;
+    bottom: 5px;
+    right: 1px;
+    display: none; /* 기본적으로 버튼을 숨김 */
+
+    border-width: 1px; /* 구분선 굵기 설정 */
+    border-style: solid; /* 구분선 스타일 설정 (필요 시) */
+    border-color: black; /* 구분선 색상 설정 (필요 시) */
+    background-color: white; /* 버튼 배경색을 하얀색으로 설정 */
+    color: black; /* 글자 색상 설정 */
+    padding: 10px 20px; /* 버튼 내부 여백 설정 */
+    cursor: pointer; /* 마우스 커서 변경 */
+}
+
+.hidden {
+    display: none;
+}
+
+.edit-comment-textarea{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box; 
+    resize: none; /* 사용자가 크기를 조정하지 못하게 함 (선택 사항) */
+    outline: none; /* 클릭 시 나타나는 구분선 제거 *//* 사용자가 크기를 조정하지 못하게 함 (선택 사항) */
+}
+
+.edit-comment-submit {
+    position: absolute;
+    bottom: 40px;
+    right: 292px;
+    display: none; /* 기본적으로 버튼을 숨김 */
+
+    border-width: 1px; /* 구분선 굵기 설정 */
+    border-style: solid; /* 구분선 스타일 설정 (필요 시) */
+    border-color: black; /* 구분선 색상 설정 (필요 시) */
+    background-color: white; /* 버튼 배경색을 하얀색으로 설정 */
+    color: black; /* 글자 색상 설정 */
+    padding: 1px 2px; /* 버튼 내부 여백 설정 */
+    cursor: pointer; /* 마우스 커서 변경 */
+}

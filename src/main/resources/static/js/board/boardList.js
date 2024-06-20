@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
+
+	 // 날짜 부분만 추출
+	 const timeElement = document.querySelector('.udate');
+	 const date = new Date(timeElement.textContent);
+	 const formattedDate = date.toISOString().split('T')[0]; 
+	 timeElement.textContent = formattedDate;
+
 	const boardItems = document.querySelectorAll(".board-item");
 	const buttons = document.querySelectorAll('.category-btn');
 	const categoryValue = document.querySelector('input[name="codeId"]').value;

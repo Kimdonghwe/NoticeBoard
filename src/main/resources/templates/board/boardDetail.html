@@ -6,13 +6,21 @@
 		<!-- 네비게이션바 부분 -->
 		<script src="/static/js/common/navigation.js" defer></script>
 		<link link rel="stylesheet" type="text/css" href="/static/css/common/navigation.css" />
-		<!--  -->
+		<!-- 타이블 부분 -->
+		<link href="/static/css/common/boardTitle.css" rel="stylesheet" />
+		<!-- 본문 부분  -->
 		<script src="/static/js/board/boardDetail.js" defer></script>
 		<link href="/static/css/board/boardDeatil.css" rel="stylesheet" />
-		<link href="/static/css/common/boardTitle.css" rel="stylesheet" />
+		<!-- 댓글부분 -->
+		<script src="/static/js/board/boardDeatilComment.js" defer></script>
+		<link href="/static/css/board/boardDetailComment.css" rel="stylesheet" />
+
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 		<title>조회</title>
+		<script>
+			var userNickname = [[${session.loginMember.nickname}]]; 
+		</script>
 	</head>
 	<body>
 
@@ -81,11 +89,11 @@
 								<span id="likeCount" th:text="${good}"> 0 </span> <span> | </span>
 							</div>
 							<!--  -->
-							<span class="info-head">댓글 </span><span class="rbbs">10</span><span> | </span>
+							<span class="info-head">댓글 </span><span class="commentCount" th:text="${commentCnt}">10</span><span> | </span>
 							<!--   -->
 							<span class="info-head">조회수 </span><span class="hit" th:text="${noticeBoard.hit}">100</span><span> | </span>
 							<!--   -->
-							<span class="info-head">작성일 </span><span class="cdate">2024-10-10</span>
+							<span class="info-head">작성일 </span><time class="udate" th:text="${noticeBoard.udate}">2024-10-10</time>
 						</div>
 					</div>
 					<div class="content-wrapper row mt-3">
@@ -93,12 +101,25 @@
 					</div>
 
 					<div class="rbbs-head-wrapper row">
-						<div><i class="fas fa-comment"></i> <span>댓글</span> <span> 10</span></div>
+						<div><i class="fas fa-comment"></i> <span>댓글</span> <span class="commentCount" th:text="${commentCnt}"> 10</span></div>
 					</div>
 					<div class="rbbs-List-wrapper row">
-						
+
 					</div>
-					<div class="rbbs-input-wrapper row"></div>
+
+					<div class="rbbs-input-wrapper row">
+
+						<div class="input-item border m-2">
+							<div class="input-head-info row">
+								<span class="col-md-1">댓글작성</span>
+								<span class="input-comment-nickname col-md-1" th:text="${session.loginMember.nickname}">작성자1</span>
+							</div>
+							<div class="comment-wrap"><textarea id="comment-textarea"></textarea>
+							<button class="comment-submit" id="comment-submit">작성</button>
+							</div>
+						</div>
+
+					</div>
 				</div>
 			</div>
 		</div>
@@ -109,14 +130,26 @@
 				<div class="head-info row">
 					<span class="comment-nickname col-md-8">작성자1</span>
 					<div class="head-info-right col-md-4 row justify-content-center pr-0">
-						<time class="comment-cdate col-md-5 m-1">2024-12-12</time>
-						<span class="col-md-1 m-1"> | </span>
-						<button class="btn col-md-3">댓글</button>
+						<time class="comment-udate col-md-5 mt-1">2024-12-12</time>
+						<div class="btn-group col-sm-4" id="comment-actions">
+							<span > | </span>
+							<button type="button" class="btn btn-sm" id="edit-Btn">수정</button>
+							<span> | </span>
+							<button type="button" class="btn btn-sm" id="delete-Btn">삭제</button>
+						</div>
 					</div>
-				</div>
+				</div>		
 				<div class="comment-wrap"><p>comment</p></div>
 			</div>
 		</template>
+
+		<template id="editCommentTemplate">
+			<div class="edit-comment-wrap item">
+				<textarea class="edit-comment-textarea" id="comment-textarea" ></textarea>
+				<button class="edit-comment-submit" id="comment-submit">수정</button>
+			</div>
+		</template>
+
 	</body>
 	<script>
 

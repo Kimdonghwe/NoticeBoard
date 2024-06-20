@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
+
+    // 날짜 부분만 추출
+    const timeElement = document.querySelector('.udate');
+    const date = new Date(timeElement.textContent);
+    const formattedDate = date.toISOString().split('T')[0]; 
+    timeElement.textContent = formattedDate;
+
     const noticeBoardId = document.getElementById("title").getAttribute("data-noticeboard-id");
     isLike(); // 회원이 해당 게시글에 좋아요를 선택했는지 판별
     calculateHit(); // 페이지 불러올때마다 db에서 해당게시글 조회수 1올리고 js딴에서도 수치 1올림
@@ -63,6 +70,7 @@ function isLike(){
         .catch(error => console.error('Error:', error));
     }
 
+    // 조회수 기능
     function calculateHit() { 
 
         fetch(`/api/board/hit?noticeboardId=${noticeBoardId}`, {
@@ -71,7 +79,7 @@ function isLike(){
         .then(response => response.text())
         .then(result => {
             if (result === 'Success') {
-                document.querySelector('.hit-count').textContent = parseInt(document.querySelector('.hit-count').textContent) + 1
+                document.querySelector('.hit').textContent = parseInt(document.querySelector('.hit').textContent) + 1
             } else {
                 console.error('조회수 처리에 실패했습니다.');
             }

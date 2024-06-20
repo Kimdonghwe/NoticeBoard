@@ -22,4 +22,5 @@ public class ApiBoardController {
     noticeBoardSVC.calucateHit(noticeboardId);
     return "Success";
   }
+
 }
