@@ -53,7 +53,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     function displayComments() {
-        fetch('/api/comment/all', {
+        const noticeBoardId = document.getElementById("title").getAttribute("data-noticeboard-id");
+        fetch(`/api/comment/all/${noticeBoardId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -70,14 +71,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 
                 comments.forEach(comment => {
                     var clone = document.importNode(template.content, true);
+
+                    var formattedUdate = new Date(comment.udate).toLocaleString('ko-KR', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit'
+                    }).replace(/\./g, '-').replace(' ', '').replace('오전', 'AM').replace('오후', 'PM');
+
                     clone.querySelector('.comment-nickname').textContent = comment.nickname;
-                    clone.querySelector('.comment-udate').textContent = comment.udate; // 서버에서 받은 생성 날짜
+                    clone.querySelector('.comment-udate').textContent = formattedUdate; // 서버에서 받은 생성 날짜
                     clone.querySelector('.comment-wrap p').textContent = comment.content;
 
                     var headInfo = clone.querySelector('.head-info');
                     headInfo.dataset.commentId = comment.commentId; // data-comment-id 속성 설정
 
                     var commentActions = clone.querySelector('#comment-actions');
+                    console.log(userNickname, comment.nickname);
                     if (userNickname != comment.nickname) {
                         commentActions.style.display = 'none';
                     }
@@ -88,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
 
                     clone.querySelector('#delete-Btn').addEventListener('click', function() {
-                        deleteComment(comment.commentId);
+                        showDeleteConfirmModal(comment.commentId);
                     });
 
                     commentList.appendChild(clone);
@@ -160,6 +172,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
         }, { once: true });
+    }
+
+    function showDeleteConfirmModal(commentId) {
+        // 모달 창을 보여줌
+        $('#deleteConfirmModal').modal('show');
+
+        // 모달의 확인 버튼 클릭 시 삭제 기능 수행
+        document.getElementById('confirmDeleteBtn').onclick = function() {
+            deleteComment(commentId);
+            $('#deleteConfirmModal').modal('hide');
+        };
     }
     
     function deleteComment(commentId) {

@@ -17,9 +17,13 @@ public class RbbsDAOImpl implements RbbsDAO {
   @Autowired
   private NamedParameterJdbcTemplate jdbcTemplate;
 
-  public List<Rbbs> getAllComments() {
-    String sql = "SELECT * FROM RBBS";
-    return jdbcTemplate.query(sql, (rs, rowNum) -> {
+  public List<Rbbs> getCommentsBynoticeboardId(Long noticeboardId) {
+    String sql = "SELECT * FROM RBBS WHERE NOTICEBOARD_ID = :noticeboardId ORDER BY cdate ASC";
+
+    SqlParameterSource params = new MapSqlParameterSource()
+            .addValue("noticeboardId", noticeboardId);
+
+    return jdbcTemplate.query(sql,params,(rs, rowNum) -> {
       Rbbs rbbs = new Rbbs();
       rbbs.setCommentId(rs.getLong("comment_id"));
       rbbs.setNoticeboardId(rs.getLong("noticeboard_id"));

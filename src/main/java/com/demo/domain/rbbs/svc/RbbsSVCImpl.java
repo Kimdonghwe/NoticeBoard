@@ -14,8 +14,8 @@ public class RbbsSVCImpl implements  RbbsSVC{
   RbbsDAO rbbsDAO;
 
   @Override
-  public List<Rbbs> getAllComments() {
-    return rbbsDAO.getAllComments();
+  public List<Rbbs> getCommentsBynoticeboardId(Long noticeboardId) {
+    return rbbsDAO.getCommentsBynoticeboardId(noticeboardId);
   }
 
   @Override

@@ -12,6 +12,8 @@
 			<div class="logo text-center p-0">게시글V2</div>
 			<div class="row justify-content-center">
 				<div class="col-md-4">
+					<!-- 회원 일 경우 -->
+					<th:block th:unless="${session.loginMember}">
 					<div class="login_wrap mt-5">
 						<form action="" id="loginForm" method="post" class="card p-4">
 							<div class="mb-3">
@@ -25,8 +27,7 @@
 							<button type="submit" class="btn btn-primary w-100">로그인</button>
 						</form>
 					</div>
-
-					<div class="container find_wrap">
+					<div class="find_wrap">
 						<div class="row justify-content-end">
 							<div class="col-auto"><button type="button" class="btn join" onclick="location.href='/join'">회원가입</button></div>
 							<div class="col-auto p-0">
@@ -34,6 +35,20 @@
 							</div>
 						</div>
 					</div>
+				</th:block>
+
+				<!-- 회원인 경우 -->
+				<th:block th:if="${session.loginMember}"> 
+				<div class="login_wrap mt-5 row justify-content-center">
+					<div class="board_button_wrap col-md-4"><button class="btn btn-primary" onclick="location.href='/board'">게시글</button></div>
+					<div class="mypage_button_wrap col-md-4"><button class="btn btn-primary" onclick="location.href='/#'">마에페이지</button></div>
+				</div>
+
+				</th:block>
+
+
+
+
 				</div>
 			</div>
 		</div>

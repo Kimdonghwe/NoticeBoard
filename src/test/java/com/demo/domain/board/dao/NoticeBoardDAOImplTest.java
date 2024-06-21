@@ -35,12 +35,12 @@ class NoticeBoardDAOImplTest {
   void addBoard() {
 
     for(int i=0 ; i< 100; i++) {
-      LoginForm loginForm = new LoginForm(1L, "kimdonghwe", "kdh1234@naver.com");
+      LoginForm loginForm = new LoginForm(22L, "hoki", "kdh1@naver.com");
 
       // AddBoardForm 객체 생성 및 값 할당
       AddBoardForm addBoardForm = new AddBoardForm();
       addBoardForm.setSelectGubun("B0102");
-      addBoardForm.setTitle("WarOfGoddess5 Vengence"+" "+i);
+      addBoardForm.setTitle("Solution"+" "+i);
       addBoardForm.setContent("공략"+" "+i);
 
       log.info("noticeBoardId = {} ", noticeBoardDAO.addBoard(addBoardForm, loginForm));

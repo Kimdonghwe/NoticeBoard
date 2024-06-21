@@ -54,8 +54,8 @@
 		</div>
 		<div class="board-title-right col-sm-9">
 			<div><h2>kdh게임게시판</h2></div>
-			<div><span>구독자수 </span><span> : 100명 </span><span> |</span><span>관리자 : kdh </span></div>
-			<div><span>게임이벤트중@@@@@@@</span></div>
+			<div><span>구독자수 : </span><span> 100 </span>
+			<div><span>반갑습니다. 부트스트랩을 활용한 게시판 구현 토이프로젝트 입니다.</span></div>
 		</div>
 	</div>
 
@@ -69,7 +69,7 @@
 							<div class="col-sm-1"><button type="button" class="btn category-btn" data-code-id="B0101">자유</button></div>
 							<div class="col-sm-1"><button type="button" class="btn category-btn" data-code-id="B0102">공략</button></div>
 							<div class="create-board-wrap  d-flex justify-content-end col-sm-10">
-								<button class="create-board-btn btn" onclick="location.href='/board/add'">글쓰기</button>
+								<button class="create-board-btn " onclick="location.href='/board/add'">글쓰기</button>
 							</div>
 						</div>
 					</div>
@@ -77,10 +77,10 @@
 					<div class="board-table">
 						<div class="table-header row">
 							<div class="col-sm-1"><span>번호</span></div>
-							<div class="col-sm-5"><span>제목</span></div>
+							<div class="d-flex justify-content-center align-items-center col-sm-5"><span>제목</span></div>
 							<div class="col-sm-2"><span>작성자</span></div>
-							<div class="col-sm-2"><span>작성일</span></div>
-							<div class="col-sm-2"><span>조회수</span></div>
+							<div class="d-flex justify-content-center align-items-center col-sm-2"><span>작성일</span></div>
+							<div class="d-flex justify-content-center align-items-center col-sm-2"><span>조회수</span></div>
 						</div>
 
 						
@@ -90,8 +90,8 @@
 								<div class=" col-sm-1"><p class="noticeBoardNum" th:text="${stat.count}" th:data-noticeboard-id="${noticeBoard.noticeboardId}">번호</p></div>
 								<div class="col-sm-5"><p th:text="${noticeBoard.title}">제목</p></div>
 								<div class="col-sm-2"><p th:text="${noticeBoard.nickname}">작성자</p></div>
-								<div class="col-sm-2"><p class="udate" th:text="${noticeBoard.udate}">작성일</p></div>
-								<div class="col-sm-2"><p th:text="${noticeBoard.hit}">조회수</p></div>
+								<div class="d-flex justify-content-center align-items-center col-sm-2"><p class="udate" th:text="${noticeBoard.udate}">작성일</p></div>
+								<div class="d-flex justify-content-center align-items-center col-sm-2"><p th:text="${noticeBoard.hit}">조회수</p></div>
 							</div>
 							<!-- 아이템 종료-->
 						</div>

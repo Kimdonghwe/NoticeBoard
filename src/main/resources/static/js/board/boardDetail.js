@@ -21,9 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if(document.getElementById("delete-Btn")){
     // 추후 삭제버튼 누르면 modal 창으로 삭제확인 하는 로직추가 필요
     document.getElementById("delete-Btn").addEventListener("click", evt =>{
-        deltePage(noticeBoardId);
+
+        showDeleteConfirmModal(noticeBoardId);
     });
     }
+
 
     document.querySelector(".like-button-wrap").addEventListener("click", evt => { 
         toggleLike()
@@ -98,6 +100,18 @@ function editPage(noticeboardId) {
 function deltePage(noticeboardId) {
     location.href = `/board/delete/${noticeboardId}`;
 }
+
+function showDeleteConfirmModal(noticeBoardId) {
+    // 모달 창을 보여줌
+    $('#deleteConfirmModal').modal('show');
+
+    // 모달의 확인 버튼 클릭 시 삭제 기능 수행
+    document.getElementById('confirmDeleteBtn').onclick = function() {
+        deltePage(noticeBoardId);
+        $('#deleteConfirmModal').modal('hide');
+    };
+}
+
 
 
 

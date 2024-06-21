@@ -16,7 +16,46 @@
 	border-right: none;
 }
 
-.active {
-    background-color: #e0e2e4;
-    color: rgb(94, 91, 91);
+.category-btn.active {
+	background-color: gray;
+	color: white;
 }
+
+.create-board-btn {
+	background-color: #007bff;
+	color: white;
+	border-radius: 5px;
+	padding: 10px 20px;
+	font-weight: bold;
+}
+
+.create-board-btn:hover {
+	background-color: #0056b3;
+}
+/* ----------- 페이징 --------- */
+#pagination {
+	margin: 20px 0 20px -200px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#pagination button {
+	background-color: cornflowerblue;
+	border: none;
+	color: #fff;
+	padding: 10px;
+	line-height: 100%;
+	margin: 0 5px;
+}
+
+#pagination button:hover {
+	cursor: pointer;
+	background-color: rgb(68, 125, 231);
+}
+
+#pagination button.active {
+	background-color: rgb(68, 125, 231);
+	font-size: 1.2rem;
+}
+/* -------- 페이징 끝 -------- */

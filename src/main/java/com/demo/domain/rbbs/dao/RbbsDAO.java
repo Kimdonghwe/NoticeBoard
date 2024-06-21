@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface RbbsDAO {
 
-  List<Rbbs> getAllComments();
+  List<Rbbs> getCommentsBynoticeboardId(Long noticeboardId);
   public int insertComment(CommentForm commentForm);
 
   public int updateComment(CommentForm commentForm);

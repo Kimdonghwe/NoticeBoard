@@ -58,10 +58,10 @@ public class ApiCommentController {
     return res;
   }
 
-  @GetMapping("all")
-  public ApiResponse<?> getCommentLst(){
+  @GetMapping("all/{noticeboardId}")
+  public ApiResponse<?> getCommentLst(@PathVariable("noticeboardId") Long noticeboardId){
 
-    ApiResponse res = ApiResponse.createApiResponse(ResCode.OK.getCode(), ResCode.OK.name(), rbbsSVC.getAllComments());
+    ApiResponse res = ApiResponse.createApiResponse(ResCode.OK.getCode(), ResCode.OK.name(), rbbsSVC.getCommentsBynoticeboardId(noticeboardId));
     return res;
   }
 
@@ -71,7 +71,7 @@ public class ApiCommentController {
     ApiResponse res = null;
     log.info("commentId = {} ", commentId);
 
-    if ( rbbsSVC.deleteComment(commentId) == 1)  res = ApiResponse.createApiResponse(ResCode.OK.getCode(), ResCode.OK.name(), rbbsSVC.getAllComments());
+    if ( rbbsSVC.deleteComment(commentId) == 1)  res = ApiResponse.createApiResponse(ResCode.OK.getCode(), ResCode.OK.name(), null);
     else res = ApiResponse.createApiResponse(ResCode.NONE.getCode(), ResCode.NONE.name(), null);
 
     return res;
